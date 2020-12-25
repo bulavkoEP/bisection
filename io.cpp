@@ -40,21 +40,27 @@ void print(double* mat, int n, int l, int m, ostream& out) {
 }
 
 double fun(int k, int n, int i, int j) {
-    switch(k) {
-        case 1: {
-            return n - max(i, j) + 1;
+        switch(k) {
+            case 1: {
+                return n - max(i, j) + 1;
+            }
+            case 2: {
+                return max(i, j) + 1;
+            }
+            case 3: {
+                return abs(i - j);
+            }
+            case 4: {
+                return 1.0 / (i + j + 1);
+            }
+            case 5: {
+                if (i == j && i != n - 1) {
+                    return 1;
+                }
+                if (i == n - 1 || j == n - 1){
+                    return min(i, j) + 1;
+                }
+            }
         }
-        case 2: {
-            return max(i, j) + 1;
-        }
-        case 3: {
-            return abs(i - j);
-        }
-        case 4: {
-            return 1.0 / (i + j + 1);
-        }
-        default: {
-            return 0;
-        }
-    }
+    return 0;
 } 

@@ -8,7 +8,7 @@ void three_diag(double* mat, int n) {
 			x = mat[i * n + i - 1];
 			y = mat[j * n + i - 1];
 			r = sqrt(x * x + y * y);
-			if (fabs(y) < EPS) continue;
+			if (fabs(y) < EPS || fabs(x) < EPS) continue;
 
 			cos = x / r;
 			sin = -y / r;
