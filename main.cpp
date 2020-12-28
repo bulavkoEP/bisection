@@ -47,7 +47,7 @@ int main(int argc, char * argv[])
         cout << "incorrect argument" << endl;
         return 0;
     }
-    double* mat = new double[n * n];
+    double* mat = new double[n * (n + 1) / 2];
     if (argc == 6 && k == 0) {
         name = argv[5];
         read_matrix_from_file(mat, n, name);
@@ -63,18 +63,21 @@ int main(int argc, char * argv[])
 
     double trace_init = 0;
     double norm_init = 0;
-    for (int i = 0; i < n; ++i) trace_init += mat[i * n + i];
-    for (int i = 0; i < n * n; ++i) norm_init += mat[i] * mat[i];
+    for (int i = 0; i < n; ++i) trace_init += mat[ind(i, i)];
+    for (int i = 0; i < n * (n + 1) / 2; ++i) norm_init += mat[i] * mat[i];
     norm_init = sqrt(norm_init);
 
     clock_t t_start = clock();
-    cout << "JSDF" << endl;
+    //cout << "JSDF" << endl;
     find_values(mat, n, res, eps);
 
     cout << "time: " << (double) (clock() - t_start) / CLOCKS_PER_SEC << endl;
 
     cout << "RES: " << endl;
-    print(res, n, 1, m, cout);
+    //print(res, n, 1, m, cout);
+    for (int i = 0; i < m; ++i) {
+        cout << res[i] << endl;
+    }
     cout << endl;
 
     double trace_after = 0, norm_after = 0; 
@@ -86,3 +89,4 @@ int main(int argc, char * argv[])
 
     delete[] mat; delete[] res;
 }
+ 

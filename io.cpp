@@ -10,12 +10,18 @@ int read_matrix_from_file(double* matrix, int n, string filename) {
     double tmp;
     
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
+        for (int j = 0; j < i; ++j) {
             if (!(in >> tmp)) {
                 cout << "Error reading file" << endl;
                 return -1;
             }
-            matrix[i * n + j] = tmp;
+        }
+        for (int j = i; j < n; ++j) {
+            if (!(in >> tmp)) {
+                cout << "Error reading file" << endl;
+                return -1;
+            }
+            matrix[ind(i, j)] = tmp;
         }
     }
     in.close();
@@ -24,8 +30,8 @@ int read_matrix_from_file(double* matrix, int n, string filename) {
 
 void generate_matrix_from_formula(double* matrix, int n, int k) {
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            matrix[i * n + j] = fun(k, n, i, j);
+        for (int j = i; j < n; ++j) {
+            matrix[ind(i, j)] = fun(k, n, i, j);
         }
     }
 }
@@ -33,7 +39,7 @@ void generate_matrix_from_formula(double* matrix, int n, int k) {
 void print(double* mat, int n, int l, int m, ostream& out) {
     for (int i = 0; i < min(m, n); i++) {
         for (int j = 0; j < min(m, l); j++) {
-            out << mat[l * i + j] << " ";
+            out << mat[ind(i, j)] << " ";
         }
         out << endl;
     }

@@ -16,3 +16,5 @@ void generate_matrix_from_formula(double* matrix, int n, int k);
 void print(double* matrix, int n, int l, int m, ostream& of);
 
 int ind(int i, int j);
+
+
